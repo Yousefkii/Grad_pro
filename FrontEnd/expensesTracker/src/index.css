@@ -16,4 +16,10 @@
     background-color: #fcfbfc;
     overflow-x: hidden;
   }
+  .input-box{
+    @apply w-full flex justify-between gap-3 text-sm text-black bg-slate-100 rounded px-4 py-3 mb-4 mt-3 border border-slate-200 outline-none;
+  }
+  .btn-primary{
+    @apply bg-primary text-white font-medium px-4 py-3 rounded w-full hover:bg-purple-700 transition duration-300;
+  }
 }
