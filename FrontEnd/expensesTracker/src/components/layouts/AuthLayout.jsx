@@ -1,4 +1,3 @@
-import React from 'react'
 import logincard from '../../assets/images/logincard.png'
 
 const AuthLayout = ({children}) => {
