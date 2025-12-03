@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const ConnectDB = require("./config/db");
 const authRouts = require("./routes/authRoutes");
+const incomeRoutes = require("./routes/incomeRoutes");
 
 const app = express();
 // Middleware to handle CORS
@@ -18,6 +19,8 @@ app.use(express. json());
 ConnectDB();
 
 app.use("/api/vi/auth", authRouts);
+app.use("/api/vi/income", incomeRoutes);
+
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
