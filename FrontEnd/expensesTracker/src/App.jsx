@@ -9,10 +9,12 @@ import{BrowserRouter as Router,
   Route,
   Navigate 
 } from 'react-router-dom'
+import UserProvider from './context/userContext'
 
 
 const App = () => {
   return (
+    <UserProvider>
     <div>
 <Router>
   <Routes>
@@ -26,7 +28,7 @@ const App = () => {
   </Routes>
 </Router>
     </div>
-
+</UserProvider>
   )
 }
 

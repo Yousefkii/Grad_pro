@@ -5,6 +5,9 @@ const path = require("path");
 const ConnectDB = require("./config/db");
 const authRouts = require("./routes/authRoutes");
 const incomeRoutes = require("./routes/incomeRoutes");
+const expenseRoutes = require("./routes/expenseRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
+
 
 const app = express();
 // Middleware to handle CORS

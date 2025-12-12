@@ -2,8 +2,13 @@ import AuthLayout from '../../components/layouts/AuthLayout'
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/inputs/input';
 import { validateEmail } from '../../utils/helper';
-import React, { use, useState } from 'react'
+import {  useState } from 'react'
 import ProfilePhotoSelector from '../../components/inputs/ProfilePhotoSelector'
+import axiosInstance from '../../utils/axiosinstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
+import uploadImage from '../../utils/uploadImage';
 
 
 const SignUp = () => {
@@ -13,9 +18,13 @@ const SignUp = () => {
     const [fullName,setFullName] = useState('');
     const navigate = useNavigate();
     const [profilePic, setEmailPicture] = useState (null);
+    const {updateUser} = useContext(UserContext);
 
     const handleSignUp = async(e) =>{
         e.preventDefault();
+
+        let profileImageUrl = ""; 
+
         if(!fullName){
                     setError("your full name is required.");
                     return;
@@ -31,6 +40,35 @@ const SignUp = () => {
                 }
                 
                   setError ("");
+
+                  try{
+
+                    if(profilePic){
+                        const imgUploadRes = await uploadImage(profilePic);
+                        profileImageUrl = imgUploadRes.imageUrl || "";
+                    }
+
+                    const response = await axiosInstance.post(API_PATHS.AUTH.RESGISTER, {
+                        fullName,
+                        email,
+                        password,
+                        profileImageUrl,
+                    });
+
+                    const {token, user} = response.data;
+
+                    if(token){
+                        localStorage.setItem("token", token);
+                        updateUser(user);
+                        navigate("/dashboard");
+                    }
+                  } catch(error) {
+                    if(error.response && error.response.data.message){
+                        setError(error.response.data.message);
+                    }else{
+                        setError("Something went wrong, please try again")
+                    }
+                  }
     }
 
   return (
