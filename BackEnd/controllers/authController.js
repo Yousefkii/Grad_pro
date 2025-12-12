@@ -33,9 +33,7 @@ id: user ._id,
 user,
 token: generateToken(user ._id),
 });
-}
-catch (err) {
-
+}catch (err) {
 res
 .status (500)
 .json({ message: "Error registering user", error: err.message });
@@ -49,12 +47,12 @@ exports.loginUser = async (req, res) =>{
 
     try{
         const user = await User.findOne({email});
-    if(!user || !(await user.comaprePassword(password))){
+    if(!user || !(await user.comparePassword(password))){
         return res.status(400).json({message:"Invalid credentials"})
     }
 
     res.status(200).json({
-        id:user_id,
+        id:user ._id,
         user,
         token: generateToken(user._id),
     }); 
@@ -62,6 +60,7 @@ exports.loginUser = async (req, res) =>{
     res
 .status (500)
 .json({ message: "Error registering user", error: err.message });
+
 }
 }
 exports.getUserInfo = async (req, res) =>{
