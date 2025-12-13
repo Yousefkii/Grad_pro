@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../utils/axiosinstance';
 import { API_PATHS } from '../../../utils/apiPaths';
 import { useEffect } from 'react';
+import InfoCard from '../../../components/Cards/InfoCard';
+import { LuHandCoins, LuWalletMinimal } from 'react-icons/lu';
+import { IoMdCard } from 'react-icons/io';
+import { addThousandsSeparator } from '../../../utils/helper';
 
 const Home = () => {
   UseUserAuth();
@@ -42,10 +46,31 @@ fetchDashboardData();
   return (
     <DashboardLayout activeMenu = "Dashboard">
     <div className='my-5 mx-auto'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+         <InfoCard 
+           icon = {<IoMdCard/>}
+           label = "total Balance"
+           value = {addThousandsSeparator(dashboardData?.totalBalance || 0)}
+           color = "bg-primary"
+           />
 
+           <InfoCard 
+           icon = {<LuHandCoins/>}
+           label = "total Income"
+           value = {addThousandsSeparator(dashboardData?.totalIncome || 0)}
+           color = "bg-orange-500"
+           />
+
+           <InfoCard 
+           icon = {<LuWalletMinimal/>}
+           label = "total Expense"
+           value = {addThousandsSeparator(dashboardData?.totalExpenses || 0)}
+           color = "bg-red-500"
+           />
+      </div>
     </div>
     </DashboardLayout>
-  )
-}
+  );
+};
 
 export default Home

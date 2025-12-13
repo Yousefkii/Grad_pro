@@ -3,7 +3,7 @@ import {UserContext} from '../../context/UserContext'
 import Navbar from './Navbar'
 import SideMenu from './SideMenu'
 
-const DashboardLayout = ({Children, activeMenu}) => {
+const DashboardLayout = ({children, activeMenu}) => {
     const {user} = useContext(UserContext)
   return  (
     <div className=''>
@@ -14,7 +14,7 @@ const DashboardLayout = ({Children, activeMenu}) => {
             <div className='max-[1080px]:hidden'>
                 <SideMenu activeMenu={activeMenu}/>
             </div>
-            <div className='grow mx-5'> {Children} </div>
+            <div className='grow mx-5'> {children} </div>
         
         </div>
     )
