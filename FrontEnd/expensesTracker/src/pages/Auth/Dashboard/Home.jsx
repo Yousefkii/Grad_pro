@@ -88,7 +88,7 @@ fetchDashboardData();
         totalExpense = {dashboardData?.totalExpense ||0}
       />
 
-      <ExpenseTransactions 
+      <RecentExpense 
         transactions= {dashboardData?.last30DaysExpenses?.transactions || []}
         onSeeMore={()=> navigate("/expense")}
         />
