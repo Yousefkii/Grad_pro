@@ -2,12 +2,15 @@ const Income = require("../models/Income");
 const xlsx = require('xlsx')
 
 exports.addIncome = async (req, res) =>{
-const userId = req.User.id;
+ console.log("addIncome req.user:", req.user);
+  console.log("addIncome req.body:", req.body);
+const userId = req.user?.id;
+   
 
 try{
-    const {icon, source, amout, date} = req.body;
+    const {icon, source, amount, date} = req.body;
 
-    if(!source || !amout || !date){
+    if(!source || !amount || !date){
         return res.status(400).json({message: "All fields are required"})
     }
 
@@ -21,6 +24,7 @@ try{
     await newIncome.save();
     res.status(200).json(newIncome);
 }catch (error){
+    console.error("addIncome error:", error);
     res.status(500).json({message: "Server Error"})
 }
 
@@ -65,4 +69,4 @@ exports.downloadIncomeExcel = async (req, res) =>{
         } catch (error) {
             res.status(500).json({message: "Server Error"})
         }
-}
+    }

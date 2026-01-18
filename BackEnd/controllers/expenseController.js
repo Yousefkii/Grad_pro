@@ -2,7 +2,7 @@ const Expense = require("../models/Expense");
 const xlsx = require('xlsx')
 
 exports.addExpense = async (req, res) =>{
-const userId = req.User.id;
+const userId = req.user.id;
 
 try{
     const {icon, category, amount, date} = req.body;
@@ -47,14 +47,16 @@ exports.deleteExpense = async (req, res) =>{
 }
 
 exports.downloadExpenseExcel = async (req, res) =>{
-        const userId = req.user.id;
+    console.log("addExpense req.user:", req.user);
+  console.log("addExpense req.body:", req.body);
+        const userId = req.user?.id;
         try{
             const expense = await Expense.find({userId}).sort({date: -1});
 
             const data = expense.map((item) =>({
               category: item.category,
-              Amount: item.amount,
-              Date: item.date,
+              amount: item.amount,
+              date: item.date,
             }));
 
             const wb = xlsx.utils.book_new();

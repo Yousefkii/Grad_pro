@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const validateEmail = (email) => {
     const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     return regex.test(email);
@@ -24,3 +26,32 @@ export const addThousandsSeparator = (num)=>{
     return fractionalPart
     ? `${formattedInteger}.${fractionalPart}`:formattedInteger;
 };
+
+export const prepareExpenseBarChartData = (data =[]) =>{
+    const chartData = data.map((item) => ({
+      category: item?.category,
+      amount: item?.amount,
+    }));
+    return chartData;
+    };
+
+export const prepareIncomeBarChartData = (data =[]) =>{
+    const sortedData = [...data].sort((a,b) => new Date(a.date) - new Date(b.date));
+
+    const chartData = sortedData.map((item) => ({
+       month: moment(item?.date).format("DD MMM"),
+         amount: item?.amount,
+         Source: item?.source,
+    }));
+    return chartData;   
+};
+
+export const prepareExpenseLineChartData = (data =[]) =>{
+    const sortedData = [...data].sort((a,b) => new Date(a.date) - new Date(b.date));
+    const chartData = sortedData.map((item) => ({
+        month: moment(item?.date).format("DD MMM"),
+        amount: item?.amount,
+        category: item?.category,
+    }));
+    return chartData;
+    };

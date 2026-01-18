@@ -1,6 +1,5 @@
-import React from 'react'
 
-const CustomToolTip = ({active,payload}) => {
+const CustomTooltip = ({active,payload}) => {
   if(active && payload && payload.length){
     return (
         <div className='bg-white shadow-md rounded-lg p-2 border border-gray-300 '>
@@ -9,8 +8,8 @@ const CustomToolTip = ({active,payload}) => {
                 Amount: <span className='text-sm font-medium text-gray-900'>${payload[0].value}</span>
             </p>
         </div>
-    );
+     );
   }
 }
 
-export default CustomToolTip
+export default CustomTooltip

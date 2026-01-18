@@ -9,7 +9,8 @@ import{BrowserRouter as Router,
   Route,
   Navigate 
 } from 'react-router-dom'
-import UserProvider from './context/userContext'
+import  UserProvider  from './context/UserContext'
+import { Toaster } from 'react-hot-toast'
 
 
 const App = () => {
@@ -22,12 +23,19 @@ const App = () => {
     <Route path="/login" element={<Login/>}/>
     <Route path="/signup" element={<SignUp/>}/>
     <Route path="/dashboard" element={<Home/>}/>
-    <Route path="/Dashboard/income" element={<Income/>}/>
+    <Route path="/income" element={<Income/>}/>
     <Route path="/expense" element={<Expense/>}/>
 
   </Routes>
 </Router>
     </div>
+    <Toaster 
+      toastOptions={{
+        className: "",
+        style:{
+          fontsize:"13px"
+        }
+      }}/>
 </UserProvider>
   )
 }
