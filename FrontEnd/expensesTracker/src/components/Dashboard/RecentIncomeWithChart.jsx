@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CustomPieChart from '../Cards/Charts/CustomPieChart'
 
-const COLORS = ['#875CF5', '#FA2C37', '#FF6900', '#4f39f6'];
+const COLORS = ["#875CF5", "#FA2C37", "#FF6900", "#4f39f6"];
 
 const RecentIncomeWithChart = ({data, totalIncome}) => {
 
@@ -22,6 +22,8 @@ useEffect(() => {
   return () => {};
 }, [data]);
 
+
+
   return (
     <div className='card'>
         <div className='flex items-center justify-between'>
@@ -29,9 +31,9 @@ useEffect(() => {
         </div>
 
         <CustomPieChart 
-            data={data}
+            data={chartData}
             label="Total Income"
-            totalAmount={`$${totalIncome}`}
+            totalAmount={`${totalIncome}`}
             showTextAnchor
             colors={COLORS}
             />
