@@ -13,7 +13,7 @@ import { addThousandsSeparator } from '../../../utils/helper';
 import RecentTransactions from '../../../components/Dashboard/RecentTransactions';
 import FinanceOverview from '../../../components/Dashboard/FinanceOverview';
 import ExpenseTransactions from '../../../components/Dashboard/ExpenseTransactions';
-import Last30DaysExpenses from '../../../components/Dashboard/last30DaysExpenses';
+import Last365DaysExpenses from '../../../components/Dashboard/Last365DaysExpenses';
 import RecentIncomeWithChart from '../../../components/Dashboard/RecentIncomeWithChart';
 import RecentIncome from '../../../components/Dashboard/RecentIncome';
 import RecentExpense from '../../../components/Dashboard/RecentExpense';
@@ -89,12 +89,12 @@ fetchDashboardData();
       />
 
       <RecentExpense 
-        transactions= {dashboardData?.last30DaysExpenses?.transactions || []}
+        transactions= {dashboardData?.last365DaysExpenses?.transactions || []}
         onSeeMore={()=> navigate("/expense")}
         />
 
-        <Last30DaysExpenses
-          data = {dashboardData?.last30DaysExpenses?.transactions || [] }
+        <Last365DaysExpenses
+          data = {dashboardData?.last365DaysExpenses?.transactions || [] }
            />
 
           <RecentIncomeWithChart

@@ -27,13 +27,26 @@ export const addThousandsSeparator = (num)=>{
     ? `${formattedInteger}.${fractionalPart}`:formattedInteger;
 };
 
-export const prepareExpenseBarChartData = (data =[]) =>{
-    const chartData = data.map((item) => ({
-      category: item?.category,
-      amount: item?.amount,
-    }));
-    return chartData;
-    };
+export const prepareExpenseBarChartData = (data = []) => {
+  const monthlyTotals = {};
+
+  data.forEach((item) => {
+    const date = new Date(item.date);
+    const month = date.toLocaleString("default", { month: "short" }); 
+
+    if (!monthlyTotals[month]) {
+      monthlyTotals[month] = 0;
+    }
+
+    monthlyTotals[month] += item.amount;
+  });
+
+  return Object.keys(monthlyTotals).map((month) => ({
+    month,
+    amount: monthlyTotals[month],
+  }));
+};
+
 
 export const prepareIncomeBarChartData = (data =[]) =>{
     const sortedData = [...data].sort((a,b) => new Date(a.date) - new Date(b.date));
