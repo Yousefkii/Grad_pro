@@ -1,9 +1,9 @@
 import { PieChart,Pie,Cell,Tooltip,ResponsiveContainer,Legend } from "recharts"
 import CustomLegend from "./CustomLegend"
-import CustomTooltip from "./CustomToolTip"
-
+import CustomTooltip from "./CustomTooltip"
 
 const CustomPieChart = ({data, label,totalAmount,colors,showTextAnchor}) => {
+    return (
     <ResponsiveContainer width="100%" height={380}>
         <PieChart>
             <Pie 
@@ -51,7 +51,7 @@ const CustomPieChart = ({data, label,totalAmount,colors,showTextAnchor}) => {
             )}
         </PieChart>
     </ResponsiveContainer> 
- 
+    )
 }
 
 export default CustomPieChart

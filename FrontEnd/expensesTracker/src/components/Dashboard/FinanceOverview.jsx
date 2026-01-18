@@ -22,6 +22,7 @@ const FinanceOverview = ({totalBalance,totalIncome,totalExpense}) => {
         colors ={COLORS}
         showTextAnchor
         />
+        
     </div>
   )
 }

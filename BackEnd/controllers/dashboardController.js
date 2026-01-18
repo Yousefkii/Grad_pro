@@ -37,7 +37,6 @@ exports.getDashboardDate = async (req, res) => {
       0
     );
 
-    // Correctly map expense transactions to type: "expense" (was incorrectly set to "income")
     const lastTransactions = [
       ...(await Income.find({ userId }).sort({ date: -1 }).limit(5)).map(
         (txn) => ({
@@ -48,12 +47,11 @@ exports.getDashboardDate = async (req, res) => {
       ...(await Expense.find({ userId }).sort({ date: -1 }).limit(5)).map(
         (txn) => ({
           ...txn.toObject(),
-          type: "expense", // <-- fix: mark as expense
+          type: "expense",
         })
       ),
     ].sort((a, b) => b.date - a.date);
 
-<<<<<<< HEAD
          res.json({
             totalBalance:
               (totalIncome[0]?.total || 0) - (totalExpense[0]?.total || 0),
@@ -74,26 +72,3 @@ exports.getDashboardDate = async (req, res) => {
     };
 
 }
-=======
-    res.json({
-      totalBalance:
-        (totalIncome[0]?.total || 0) - (totalExpense[0]?.total || 0),
-      totalIncome: totalIncome[0]?.total || 0,
-      totalExpense: totalExpense[0]?.total || 0,
-      last30DaysExpenses: {
-        total: expensesLast30Days,
-        transactions: last30DaysExpenseTransactions, // <-- fix: correct key name
-      },
-      last60DaysIncome: {
-        total: incomeLast60Days,
-        transactions: last60DaysIncomeTransactions,
-        // optional alias so frontend components expecting `RecentTransactions` still work:
-        RecentTransactions: last60DaysIncomeTransactions.slice(0, 4),
-      },
-      recentTransactions: lastTransactions,
-    });
-  } catch (error) {
-    res.status(500).json({ message: " Server Error", error });
-  }
-};
->>>>>>> 20a207f3df13fc5061f4ade7c2db61598d78d2f8
